@@ -2,6 +2,13 @@
 Overriding is Dynamic polymorphism
 如果真的要完全移除虚函数，那么如果要实现运行时多态，则要用到函数指针
 
+C++ allows static type checking.
+C++ allows dynamic type checking.
+
+
+Dynamic type checking occurs when type information is used at runtime. C++ uses a mechanism called RTTI (runtime type information) to implement this. The most common example where RTTI is used is the dynamic_cast operator 
+
+
 # static Polymorphism
 Overloading is static polymorphic
 
@@ -39,3 +46,17 @@ func(a);
 func(b);
 
 #### CRTP另外的用处就是定义抽象方法
+
+
+
+
+
+Q23. Which of the following statements describe the use of the terms overloading and overriding in C++?
+
+B. Overloading is used to give special meaning to operators, when they are used with user-defined classes.
+
+D. Overriding is a concept used in inheritance which involves a method with one implementation in the base class and a different implementation in the derived class.
+E. Overloading involves functions with the same name but with either a different arguments or a return type while overriding involves functions with the same name, arguments and return type but a different implementation.
+
+The answer is B, D & E.
+
