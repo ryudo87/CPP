@@ -1,4 +1,10 @@
+# dynamic Polymorphism
+Overriding is Dynamic polymorphism
+如果真的要完全移除虚函数，那么如果要实现运行时多态，则要用到函数指针
+
 # static Polymorphism
+Overloading is static polymorphic
+
 ## 奇异递归模板模式（curiously recurring template pattern，CRTP)
 **a class X derives from a class template instantiation using X itself as template argument.**
 把派生类作为基类的模板参数。更一般地被称作F-bound polymorphism
