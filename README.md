@@ -6,13 +6,17 @@ the C++ compiler does not add argument/parameter type information to the name us
 
 extern "C" makes a function-name in C++ have 'C' linkage (compiler does not mangle the name)  
 
-final class: private constructor
------extern c----
+
 in c++ to indicate a C function
+
 #ifdef __cplusplus
+
 extern "C"{
+
 #endif
 
 #ifdef __cplusplus
+
 }
+
 #endif
