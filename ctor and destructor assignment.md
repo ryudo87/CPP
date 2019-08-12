@@ -12,8 +12,28 @@ D. Destructors for nonvirtual base classes are called before destructors for vir
 The answer is A, B & D.
 
 
+在构造函数前加explicit 可以防止使用这个构造函数执行任何自动转换。
 
+  
+  条款15: 让operator=返回*this的引用
+	当定义自己的赋值运算符时，必须返回赋值运算符左边参数的引用，*this。（非const，以便使(w1 = w2) = w3; 合法）
+	如果不这样做，就会导致不能连续赋值，或导致调用时的隐式类型转换不能进行，或两种情况同时发生。
 
+条款16: 在operator=中对所有数据成员赋值
+	operator=中需要显示的对基类中的数据赋值。
+	// 正确的赋值运算符
+	derived& derived::operator=(const derived& rhs)
+	{
+	  if (this == &rhs) return *this;
+
+	  base::operator=(rhs);    // 调用this->base::operator=
+	  y = rhs.y;
+	  return *this;
+	}
+    
+    
+    
+    
 Q7. Considering the following C++ code snippet, which of the following statements are true?
 class MyArray
 {
