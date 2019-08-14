@@ -96,3 +96,29 @@ if（p3）
 {
   // 不会执行到这。
 }
+
+# std::make_shared performs one heap-allocation, whereas calling the std::shared_ptr constructor performs two.
+Where do the heap-allocations happen?
+std::shared_ptr manages two entities:
+
+the control block (stores meta data such as ref-counts, type-erased deleter, etc)
+the object being managed
+std::make_shared performs a single heap-allocation accounting for the space necessary for both the control block and the data. In the other case, new Obj("foo") invokes a heap-allocation for the managed data and the std::shared_ptr constructor performs another one for the control block.
+
+## Update I: Exception-Safety
+
+Since the OP seem to be wondering about the exception-safety side of things, I've updated my answer.
+
+Consider this example,
+
+void F(const std::shared_ptr<Lhs> &lhs, const std::shared_ptr<Rhs> &rhs) { /* ... */ }
+
+F(std::shared_ptr<Lhs>(new Lhs("foo")),
+  std::shared_ptr<Rhs>(new Rhs("bar")));
+Because C++ allows arbitrary order of evaluation of subexpressions, one possible ordering is:
+
+new Lhs("foo"))
+new Rhs("bar"))
+std::shared_ptr<Lhs>
+std::shared_ptr<Rhs>
+Now, suppose we get an exception thrown at step 2 (e.g., out of memory exception, Rhs constructor threw some exception). We then lose memory allocated at step 1, since nothing will have had a chance to clean it up. The core of the problem here is that the raw pointer didn't get passed to the std::shared_ptr constructor immediately.
