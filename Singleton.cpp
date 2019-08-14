@@ -67,4 +67,13 @@ private:
     Singleton(){}
 };
 
-
+// early instantiation
+class Singleton
+{
+    static volatile Singleton* instance;
+public:
+    static volatile Singleton* getInstance() {return instance;}
+    void  test() volatile {cout<<"test"<<endl;}
+};
+ 
+volatile Singleton* Singleton::instance =  new Singleton(); 
