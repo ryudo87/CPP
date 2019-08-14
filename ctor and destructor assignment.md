@@ -1,3 +1,10 @@
+# 成员初始化列表
+
+更高效：少了一次调用默认构造函数的过程。
+有些场合必须要用初始化列表：
+常量成员，因为常量只能初始化不能赋值，所以必须放在初始化列表里面
+引用类型，引用必须在定义的时候初始化，并且不能重新赋值，所以也要写在初始化列表里面
+没有默认构造函数的类类型，因为使用初始化列表可以不必调用默认构造函数来初始化
 
 constructors should catch all possible exceptions thrown by ctors , 
 and then re-throw only those exceptions it cannot handle. 
@@ -31,10 +38,23 @@ The answer is A, B & D.
 	  return *this;
 	}
     
-    
-    
-    
-Q7. Considering the following C++ code snippet, which of the following statements are true?
+# When do you call copy constructors? 
+
+Copy constructors are called in these situations : 
+1. generates a temporary object. 
+2.a function returns an object  by value .
+3. object is passed by value as an argument to a function .
+4. When you construct an object based on another object of the same class.   
+
+# Name the implicit member functions of a class.
+
+1. default constructor 
+2. copy constructor 
+3. assignment operator 
+4. default destructor 
+5. move copy constructor
+
+# Q7. Considering the following C++ code snippet, which of the following statements are true?
 class MyArray
 {
     int *ptr;
