@@ -1,0 +1,42 @@
+
+#include "all.h"
+#include "tree.h"
+
+//Convert a character string into a value based on the radix or base.
+
+//Input parameters:
+//1. char *str such as "3523" (in decimal),
+//"11001" (in binary),
+//"a1f38c" (in hex)
+//2. radix or base(such as decimal:10, binary:2, hex:16, octal:8)
+//Return: integer value (not unsigned) that is calculated based on the input string and radix or base.
+
+//for example: string is "343432" (base 10): return value 343432
+//string is "10010" (base 2): return value is 18
+//string is "a1b" (base 16): return value is 187.
+
+
+//Negative?? space?? invalid??
+int convert_str2value(const char* str, unsigned base)
+{
+	if(NULL==str) return -1;
+	int res=0;
+
+	while(*str){
+		if(16==base &&* str >='a'){
+			res=base*res+*str-'a'+10;
+		}
+		else{
+			res=base*res+*str-'0';
+		}
+		++str;
+	}
+
+	return res;
+}
+int main()
+{
+	cout<<convert_str2value("3523",10)<<endl;
+	cout<<convert_str2value("10010",2)<<endl;
+	cout<<convert_str2value("a1b",16)<<endl;
+}

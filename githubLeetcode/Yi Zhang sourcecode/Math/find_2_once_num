@@ -1,0 +1,22 @@
+//100-34
+void find_2_once_num()
+{
+	int arr[]={3,2,12,4,2,0,9,3,4,9};
+	int n=10;
+	int res=0;
+	for(int i=0;i<n;++i){
+		res^=arr[i];
+	}
+	int mask=1;
+	while( (res & mask)==0 ){
+		mask<<=1;
+	}
+
+	int a=0,b=0;
+	for(int i=0;i<n;++i){
+		if( (arr[i]&mask) !=0)
+			a^=arr[i];
+		else b^=arr[i];
+	}
+	cout<<"unique:"<<a<<","<<b<<endl;
+}

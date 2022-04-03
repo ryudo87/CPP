@@ -1,0 +1,23 @@
+//100-24
+bool if_popSeq_is_consistentWith_pushSeq()
+{
+	int pushSeq[]={1,2,3,4,5,6};
+	int popSeq[]={2,3,5,1,4,6};
+	int n=sizeof(pushSeq)/sizeof(pushSeq[0]);
+	stack<int> mys;
+	int pi=0;
+	for(int qi=0;qi<n;qi++){
+		if(!mys.empty() && mys.top()==popSeq[qi])
+		{
+			mys.pop();
+		}
+		else{
+			while(pushSeq[pi]!=popSeq[qi]){
+				mys.push(pushSeq[pi++]);
+				if(pi>=n) return false;
+			}
+			++pi;
+		}
+	}
+	return true;
+}
